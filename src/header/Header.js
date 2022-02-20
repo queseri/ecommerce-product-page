@@ -6,7 +6,7 @@ import logo from '../images/logo.svg'
 
 function Header() {
   return (
-    <div className='header'>
+    <header className='header'>
         <div className="menu-control">
             <button className="open-modal-nav">
                 <img src={hamburger} alt="" />
@@ -23,7 +23,7 @@ function Header() {
                 <img src={profile} alt="" />
             </div>
         </div>
-    </div>
+    </header>
   )
 }
 

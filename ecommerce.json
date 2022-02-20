@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name": "shoe-1",
+        "price": 250,
+        "image": "/images/image-product-1.jpg",
+        "thubmnail": "/images/image-product-1-thumbnail.jpg"
+    }, 
+    {
+        "id": 2,
+        "name": "shoe-2",
+        "price": 250,
+        "image": "/images/image-product-2.jpg",
+        "thubmnail": "/images/image-product-2-thumbnail.jpg"
+    },
+    {
+        "id": 3,
+        "name": "shoe-3",
+        "price": 250,
+        "image": "/images/image-product-3.jpg",
+        "thubmnail": "/images/image-product-3-thumbnail.jpg"
+    },
+    {
+        "id": 4,
+        "name": "shoe-4",
+        "price": 250,
+        "image": "/images/image-product-4.jpg",
+        "thubmnail": "/images/image-product-4-thumbnail.jpg"
+    }
+]
