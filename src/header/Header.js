@@ -14,9 +14,21 @@ function Header() {
         <header className='header'>
             <nav className="flex nav">
                 <div className="menu-control flex">
-                    <button className={`open-modal-nav`} aria-pressed={false} onClick={showModal}>
-                        <img className={`hamburger ${openModal ? "hide-nav-btn" : ""}`} src={hamburger} alt="" />
-                        <img className={`close-btn ${openModal ? "" : "hide-nav-btn"}`} src={closeBtn} alt="" />
+                    <button className={`open-modal-nav`}
+                        aria-expanded={openModal}
+                        aria-controls='modal-menu'
+                        onClick={showModal}>
+                        <span className="sr-only">
+                            {openModal ? "Close the navigation" : "open the navigation"}
+                        </span>
+                        <img className={`hamburger ${openModal ? "hide-nav-btn" : ""}`}
+                            src={hamburger}
+                            aria-hidden={true}
+                            alt="" />
+                        <img className={`close-btn ${openModal ? "" : "hide-nav-btn"}`}
+                            aria-hidden={true}
+                            src={closeBtn}
+                            alt="" />
                     </button>
 
                     <div className="logo-container">
@@ -32,7 +44,7 @@ function Header() {
                         <img className='profile-image' src={profile} alt="" />
                     </button>
                 </div>
-                <div className={`modal-menu ${openModal ? "modal-active" : ""}`}>
+                <div className={`modal-menu ${openModal ? "modal-active" : ""}`} id='modal-menu'>
 
                     <ul className="nav-list">
                         <li className='nav-list-item'>
