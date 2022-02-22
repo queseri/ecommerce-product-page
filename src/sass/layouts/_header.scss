@@ -1,0 +1,79 @@
+@use 'sass:math';
+@use '../abstract';
+
+.header {
+    padding-block: abstract.$spacer-19;
+    padding-inline: abstract.$spacer-24;
+}
+
+.nav {
+    position: relative;
+}
+
+.profile,
+.cart-summary,
+.open-modal-nav {
+    background-color: transparent;
+    border: none;
+}
+
+.profile-image {
+    width: 1.5rem;
+}
+
+.menu-control {
+    gap: abstract.$spacer-19;
+}
+
+.modal-menu {
+    position: absolute;
+    top: -(abstract.$spacer-19);
+    left: 610px;
+    background: #cabcbc;
+    width: 75%;
+    min-height: 100vh;
+}
+
+.modal-active {
+    left: -(abstract.$spacer-24);
+}
+
+.cart-number {
+    background: abstract.$clr-orange;
+    border-radius: 50%;
+    width: 1rem;
+    height: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.open-modal-nav {
+    position: relative;
+    z-index: 100;
+}
+
+.close-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hide-nav-btn {
+    display: none;
+}
+
+.nav-list {
+    margin-top: abstract.$spacer-24 * 3;
+    margin-left: abstract.$spacer-24;
+    display: flex;
+    flex-direction: column;
+    gap: abstract.$spacer-24;
+}
+
+.nav-list-item-btn {
+    color: abstract.$clr-almost-black;
+    font-size: abstract.$fs-18;
+    text-decoration: none;
+}
