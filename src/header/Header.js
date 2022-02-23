@@ -5,10 +5,11 @@ import cart from '../images/icon-cart.svg'
 import profile from '../images/image-avatar.png'
 import logo from '../images/logo.svg'
 
-function Header() {
+function Header({removeOverlay}) {
     const [openModal, setOpenModal] = useState(false)
     function showModal() {
         setOpenModal(!openModal)
+        removeOverlay()
     }
     return (
         <header className='header'>
@@ -35,15 +36,7 @@ function Header() {
                         <img className='logo-image' src={logo} alt="" />
                     </div>
                 </div>
-                <div className="product-summary flex">
-                    <button className="cart-summary flex">
-                        <img className='cart-image' src={cart} alt="" />
-                        <span className='cart-number'>1</span>
-                    </button>
-                    <button className="profile">
-                        <img className='profile-image' src={profile} alt="" />
-                    </button>
-                </div>
+
                 <div className={`modal-menu ${openModal ? "modal-active" : ""}`} id='modal-menu'>
 
                     <ul className="nav-list">
@@ -64,6 +57,17 @@ function Header() {
                         </li>
                     </ul>
                 </div>
+
+                <div className="product-summary flex">
+                    <button className="cart-summary flex">
+                        <img className='cart-image' src={cart} alt="" />
+                        <span className='cart-number'>1</span>
+                    </button>
+                    <button className="profile">
+                        <img className='profile-image' src={profile} alt="" />
+                    </button>
+                </div>
+
             </nav>
 
         </header>
