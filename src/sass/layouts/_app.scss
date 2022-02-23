@@ -1,0 +1,14 @@
+@use 'sass:math';
+@use '../abstract';
+
+.container {
+    padding-inline: abstract.$spacer-24;
+
+    @include abstract.mQ(42.5rem) {
+        padding-inline: abstract.$spacer-28;
+    }
+
+    @include abstract.mQ(61.25rem) {
+        padding-inline: 10.3125rem;  
+    }
+}

@@ -55,7 +55,8 @@ function Header({removeOverlay}) {
                         <li className='nav-list-item'>
                             <a className='nav-list-item-btn' href="/">Contact</a>
                         </li>
-                    </ul>
+                        
+                    </ul>                   
                 </div>
 
                 <div className="product-summary flex">
