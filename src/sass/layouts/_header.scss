@@ -32,6 +32,9 @@
     @include abstract.mQ(42.5rem) {
         width: 40%;
     }
+    @include abstract.mQ(42.5rem) {
+        width: 50%;
+    }
 }
 
 .product-summary {
@@ -62,7 +65,7 @@
     background-color: abstract.$clr-light-grey;   
     width: 75%;
     min-height: 100vh;
-
+    z-index: 10;
     @include abstract.mQ(42.5rem) {
         background-color: abstract.$clr-white; 
         position: relative;

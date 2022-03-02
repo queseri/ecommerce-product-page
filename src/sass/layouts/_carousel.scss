@@ -1,0 +1,27 @@
+.carousel {
+	position: relative;
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+}
+.carousel-track {
+	position: relative;
+}
+.carousel-slide {
+	position: absolute;
+	top: 0;
+    bottom: 0;
+}
+.carousel-track-container {
+	min-height: 350px;
+	position: relative;
+}
+.carousel-button {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+    z-index: 1;
+}
+.carousel-button-right {
+    right: 0;
+}
