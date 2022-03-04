@@ -7,7 +7,7 @@ function App() {
   const [overlay, setOverlay] = useState(false);
  
   return (
-    <div className={`App container ${overlay ? "show-overlay" : ""}`}>
+    <div className={`App ${overlay ? "show-overlay" : ""}`}>
       <Header removeOverlay={() => setOverlay(!overlay)} />
       <Main />
     </div>

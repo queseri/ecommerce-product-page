@@ -12,7 +12,7 @@ function Header({removeOverlay}) {
         removeOverlay()
     }
     return (
-        <header className='header'>
+        <header className='header container'>
             <nav className="flex nav">
                 <div className="menu-control flex">
                     <button className={`open-modal-nav`}
