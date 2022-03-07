@@ -1,14 +1,22 @@
+@use 'sass:math';
+@use '../abstract';
+
 .carousel {
-    position: relative;
-    height: 100%;
+    position: relative;   
     width: 100%;
     margin: 0 auto;
+
+     @include abstract.mQ(38.75rem) {
+        flex: 1 1 50%;
+    }
 }
 
 .carousel-track {
-    position: relative;
-    height: 100%;
+    position: relative;   
     transition: transform 250ms ease-in;
+    @include abstract.mQ(38.75rem) {
+        transition: none;
+    }
 }
 
 .carousel-slide {
@@ -29,8 +37,42 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 1;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: abstract.$clr-white;
+}
+
+.carousel-button-left {
+	left: 1rem;
 }
 
 .carousel-button-right {
-    right: 0;
+    right: 1rem;
+}
+
+.carousel-nav {
+    //background-color: yellow;
+    // position: relative;
+    display: flex;
+    justify-content: center;
+    gap: .5rem;
+    width: 70%;
+    margin: auto;
+}
+
+.carousel-nav-hide {
+    display: none;
+}
+
+.carousel-indicator {
+    border: none;
+    outline: none;
+    padding: 0;
+    border-radius: 10px;
+    overflow: hidden;
 }

@@ -1,6 +1,6 @@
 @use './abstract';
 @use './layouts';
 
-.App {
-	min-height: 100vh;
+body {
+	overflow-x: hidden;
 }
