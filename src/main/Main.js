@@ -13,9 +13,10 @@ function Main() {
     const [fetchStatus, setFetchStatus] = useState('idle')
     const [products, setProducts] = useState([])
     const rate = .5
+    const [quantity, setQuantity] = useState(0)
     const [cost, setCost] = useState(250)
     const [netPrice, setNetPrice] = useState(cost - (cost * rate))
-    const [quantity, setQuantity] = useState(0)
+
     //const sizeRect =  elm.getBoundingClientRect()
     //console.log(sizeRect)
 
@@ -76,7 +77,7 @@ function Main() {
         const track = document.querySelector(".carousel-track")
         if (nextSlide === null) return
         moveSlide(track, currentSlide, nextSlide)
-        setCost(nextSlide.dataset.cost)
+        setCost(nextSlide.dataset.cost * quantity)
         setNetPrice(cost - (cost * rate))
         // console.log(nextSlide.dataset.cost)
     }
@@ -89,16 +90,16 @@ function Main() {
         moveSlide(track, currentSlide, prevSlide)
         setCost(prevSlide.dataset.cost)
         setNetPrice(cost - (cost * rate))
+
         //console.log(prevSlide.dataset.cost)
     }
 
     const reduce = (evt) => {
-        quantity > 0 ? setQuantity(quantity - 1) : setQuantity(0)
-
+        quantity > 0 ? setQuantity(quantity - 1) : setQuantity(1)      
     }
 
     const increase = (evt) => {
-        quantity < 10 ? setQuantity(quantity + 1) : setQuantity(10)
+        quantity < 10 ? setQuantity(quantity + 1) : setQuantity(10)       
     }
 
     if (fetchStatus === 'idle' || fetchStatus === 'loading') {
@@ -180,7 +181,7 @@ function Main() {
                             -
                         </button>
                         <span className='quantity'>{quantity}</span>
-                        <button className="btn btn-increase" onClick={increase}> 
+                        <button className="btn btn-increase" onClick={increase}>
                             +
                         </button>
                     </div>
