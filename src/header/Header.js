@@ -1,4 +1,4 @@
-import { useContext, useState, useRef } from 'react'
+import { useContext, useState } from 'react'
 import hamburger from '../images/icon-menu.svg'
 import closeBtn from '../images/icon-close.svg'
 import cart from '../images/icon-cart.svg'
