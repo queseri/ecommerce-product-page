@@ -1,12 +1,14 @@
-import { useState } from 'react'
+import { useContext, useState, useRef } from 'react'
 import hamburger from '../images/icon-menu.svg'
 import closeBtn from '../images/icon-close.svg'
 import cart from '../images/icon-cart.svg'
 import profile from '../images/image-avatar.png'
 import logo from '../images/logo.svg'
+import { DataContext } from '../context/Context'
 
 function Header({removeOverlay}) {
     const [openModal, setOpenModal] = useState(false)
+    const { quantity } = useContext(DataContext)
     function showModal() {
         setOpenModal(!openModal)
         removeOverlay()
@@ -62,7 +64,7 @@ function Header({removeOverlay}) {
                 <div className="product-summary flex">
                     <button className="cart-summary flex">
                         <img className='cart-image' src={cart} alt="" />
-                        <span className='cart-number'>1</span>
+                        <span className={`cart-number ${quantity === 0 ? "cart-number-hide" : ""}`}>{quantity}</span>
                     </button>
                     <button className="profile">
                         <img className='profile-image' src={profile} alt="" />

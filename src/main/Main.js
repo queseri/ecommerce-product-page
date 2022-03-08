@@ -1,67 +1,21 @@
 import React from 'react'
-import { useState, useRef, useEffect } from 'react';
-import * as Realm from 'realm-web'
+import { useContext, useState, useRef } from 'react'
 import Left from '../images/icon-previous.svg'
 import Right from '../images/icon-next.svg'
 import useWindowSize from './useWindowResize'
 import Cart from '../images/icon-cart.svg'
+import { DataContext } from '../context/Context'
 
 function Main() {
+   const { products, error , fetchStatus, reduce, increase, quantity } = useContext(DataContext)
     const sliderRef = useRef(null)
-    const size = useWindowSize();
-    const [error, setError] = useState(null);
-    const [fetchStatus, setFetchStatus] = useState('idle')
-    const [products, setProducts] = useState([])
-    const rate = .5
-    const [quantity, setQuantity] = useState(0)
+    const size = useWindowSize(); 
+    const rate = .5  
     const [cost, setCost] = useState(250)
     const [netPrice, setNetPrice] = useState(cost - (cost * rate))
+    console.log(products) 
 
-    //const sizeRect =  elm.getBoundingClientRect()
-    //console.log(sizeRect)
-
-    //  const [current, setCurrent] = useState(0)
-    //  const [count, setCount] = useState(0)
-    // const [totalSlides, setTotalSlides] = useState(null)
-    // const [slideWidth, setSlideWidth] = useState(null)
-
-    const fetchData = async () => {
-        setFetchStatus("loading")
-        const REALM_APP_ID = "ecommerce-app-yxftv"
-        const app = new Realm.App({ id: REALM_APP_ID });
-        const credentials = Realm.Credentials.anonymous();
-
-        try {
-            const user = await app.logIn(credentials);
-            const allProducts = await user.functions.getAllProducts()
-            // setTotalSlides(allProducts.length)
-            setProducts(await allProducts)
-            setFetchStatus("success")
-
-            console.log(allProducts)
-
-            // console.log(sliderRef.current.getBoundingClientRect())
-        } catch (err) {
-            setError(err)
-            setFetchStatus("error")
-            console.error(err);
-        }
-    }
-
-    useEffect(() => {
-        fetchData();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
-    /*
-    useEffect(() => {
-        window.addEventListener("resize", handleSize)
-    }, [size.width])
-
-    function handleSize() {
-        console.log(size.width)
-    }
-*/
+    
     const moveSlide = (track, currentSlide, targetSlide) => {
         track.style.transform = "translateX(-" + targetSlide.style.left + ")"
         currentSlide.classList.remove("current-slide")
@@ -77,7 +31,7 @@ function Main() {
         const track = document.querySelector(".carousel-track")
         if (nextSlide === null) return
         moveSlide(track, currentSlide, nextSlide)
-        setCost(nextSlide.dataset.cost * quantity)
+        setCost(nextSlide.dataset.cost)
         setNetPrice(cost - (cost * rate))
         // console.log(nextSlide.dataset.cost)
     }
@@ -94,15 +48,17 @@ function Main() {
         //console.log(prevSlide.dataset.cost)
     }
 
+    /*
     const reduce = (evt) => {
-        quantity > 0 ? setQuantity(quantity - 1) : setQuantity(1)      
+        quantity > 0 ? setQuantity(quantity - 1) : setQuantity(1)
     }
 
     const increase = (evt) => {
-        quantity < 10 ? setQuantity(quantity + 1) : setQuantity(10)       
+        quantity < 10 ? setQuantity(quantity + 1) : setQuantity(10)
     }
+    */
 
-    if (fetchStatus === 'idle' || fetchStatus === 'loading') {
+    if (fetchStatus === 'idle' || fetchStatus === 'loading' || products === 'undefined' || products.length === 0) {
         return <div className='loading'>
             <p className='loading-title'>Loading...</p>
         </div>
@@ -129,7 +85,7 @@ function Main() {
                         <img src={Right} alt="" />
                     </button>
                     <ul className='carousel-track' ref={sliderRef}>
-                        {products.map((product, idx) => <li key={product._id}
+                        {products && products.map((product, idx) => <li key={product._id}
                             data-id={product.id}
                             data-cost={product.price}
                             className={`carousel-slide  ${idx === 0 ? "current-slide" : ""}`}
@@ -141,7 +97,7 @@ function Main() {
                 </div>
 
                 <ul className="carousel-nav carousel-nav-hide">
-                    {products.map((product, idx) => <li key={product._id}>
+                    {products && products.map((product, idx) => <li key={product._id}>
                         <button className='carousel-indicator'>
                             <img className='carousel-thumb' src={product.thubmnail} alt="" />
                         </button>
