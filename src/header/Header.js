@@ -71,8 +71,7 @@ function Header({removeOverlay}) {
                     </button>
                 </div>
 
-            </nav>
-
+            </nav>        
         </header>
     )
 }

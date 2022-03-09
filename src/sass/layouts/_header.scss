@@ -2,19 +2,20 @@
 @use '../abstract';
 
 .header {
-    padding-block: abstract.$spacer-19;   
+    padding-block: abstract.$spacer-19;
+
     @include abstract.mQ(42.5rem) {
-       padding-block: abstract.$spacer-28;     
-     }
-     @include abstract.mQ(61.25rem) {
-            
-      }
+        padding-block: abstract.$spacer-28;
+    }
+
+    @include abstract.mQ(61.25rem) {}
 }
 
 .nav {
     position: relative;
+
     @include abstract.mQ(42.5rem) {
-       gap: abstract.$spacer-24;
+        gap: abstract.$spacer-24;
     }
 }
 
@@ -25,20 +26,43 @@
     border: none;
 }
 
+.open-modal-nav {
+    &:focus,
+    &:hover {
+        cursor: pointer;
+        outline: dashed currentColor;
+        outline-offset: 0.5em;
+    }
+}
+
+.profile,
+.cart-summary {
+
+    &:focus,
+    &:hover {
+        cursor: pointer;
+        outline: dashed currentColor;
+        outline-offset: 0.025em;
+    }
+}
+
 .profile {
-	display: flex;
-	justify-content: flex-start;
+    display: flex;
+    justify-content: flex-start;
     width: 24%;
+
     @include abstract.mQ(42.5rem) {
         width: 40%;
     }
+
     @include abstract.mQ(42.5rem) {
         width: 50%;
     }
 }
 
 .product-summary {
-	justify-content: flex-end;
+    justify-content: flex-end;
+    gap: .75rem;
 }
 
 .open-modal-nav {
@@ -48,9 +72,10 @@
 }
 
 .profile-image {
-   // width: 24%;
+
+    // width: 24%;
     @include abstract.mQ(42.5rem) {
-      //  width: 40%;
+        //  width: 40%;
     }
 }
 
@@ -62,12 +87,13 @@
     position: absolute;
     top: -(abstract.$spacer-19);
     left: -610px;
-    background-color: abstract.$clr-light-grey;   
+    background-color: abstract.$clr-light-grey;
     width: 75%;
     min-height: 100vh;
     z-index: 10;
+
     @include abstract.mQ(42.5rem) {
-        background-color: abstract.$clr-white; 
+        background-color: abstract.$clr-white;
         position: relative;
         min-height: auto;
         box-shadow: none;
@@ -79,8 +105,9 @@
 .modal-active {
     left: -(abstract.$spacer-24);
     transition: all 300ms ease-in-out;
+
     @include abstract.mQ(42.5rem) {
-       left: auto;
+        left: auto;
     }
 }
 
@@ -136,8 +163,9 @@
 }
 
 .show-overlay {
-    background-color: abstract.$clr-med-grey;  
+    background-color: abstract.$clr-med-grey;
+
     @include abstract.mQ(42.5rem) {
-        background-color: abstract.$clr-white; 
+        background-color: abstract.$clr-white;
     }
 }

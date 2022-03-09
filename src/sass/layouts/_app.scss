@@ -18,10 +18,27 @@
 }
 
 .main {
-
+    position: relative;
     @include abstract.mQ(38.75rem) {
-        display: flex;
+      //  display: flex;
        padding-inline: abstract.$spacer-28;
-        gap: abstract.$spacer-24;
+     
     }
+
+    @include abstract.mQ(61.25rem) {
+        padding-inline: 10.3125rem;
+    }
+}
+
+.main-container {
+    @include abstract.mQ(38.75rem) {
+        display: flex;  
+        gap: abstract.$spacer-24;     
+    }
+}
+
+.loading {
+    text-align: center;
+    font-size: abstract.$fs-28;
+    font-weight: 700;
 }
