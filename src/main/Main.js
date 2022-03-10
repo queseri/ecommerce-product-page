@@ -2,12 +2,13 @@ import React from 'react'
 import { useContext, useState, useRef, useEffect } from 'react'
 import Left from '../images/icon-previous.svg'
 import Right from '../images/icon-next.svg'
+import Delete from '../images/icon-delete.svg'
 import useWindowSize from './useWindowResize'
 import Cart from '../images/icon-cart.svg'
 import { DataContext } from '../context/Context'
 
 function Main() {
-    const { products, error, fetchStatus, reduce, increase, quantity } = useContext(DataContext)
+    const { products, error, fetchStatus, reduce, increase, quantity, cartOpen } = useContext(DataContext)
     const sliderRef = useRef(null)
     const size = useWindowSize();
     const rate = .5
@@ -142,15 +143,29 @@ function Main() {
 
                 </div>
             </div>
-            <div className="checkout-container">
+            <div className={`checkout-container ${cartOpen ? "" : "hide-checkout"}  `}>
                 <h3 className="checkout-title">
                     cart
                 </h3>
                 {quantity <= 0 ? <div><p>The cart is empty</p></div> :
-                    <div className="checkout">
+                    <div className='checkout flex'>
                         <img src={products[cartData].thubmnail} alt="" />
+                        <div className='checkout-list flex'>
+                            <div className="checkout-separator">
+                                <h4 className='checkout-list-title'>Fall Limited Edition Sneakers</h4>
+                                <p className='checkout-list-details'>{`${cost.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
+                                    *   ${quantity} =
+                                    ${(cost * quantity).toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}`}
+                                </p>
+                            </div>
+                            <button className='delete-cart'>
+                                <img src={Delete} alt="" />
+                                <span className='sr-only'>clear cart items</span>
+                            </button>
+                        </div>
                     </div>
                 }
+                <button className='btn-checkout'>Checkout</button>
 
             </div>
         </main>

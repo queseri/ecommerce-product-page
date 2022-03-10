@@ -27,6 +27,7 @@
 }
 
 .open-modal-nav {
+
     &:focus,
     &:hover {
         cursor: pointer;
@@ -37,6 +38,7 @@
 
 .profile,
 .cart-summary {
+    position: relative;
 
     &:focus,
     &:hover {
@@ -112,14 +114,19 @@
 }
 
 .cart-number {
+    align-items: center;
     background: abstract.$clr-orange;
     border-radius: 50%;
-    width: 1rem;
-    height: 1rem;
+    color: white;
     display: flex;
+    font-size: 0.625rem;
+    height: 1rem;
     justify-content: center;
-    align-items: center;
+    left: -0.5rem;
     padding: 0.5rem;
+    position: relative;
+    top: -0.5rem;
+    width: 1rem;
 }
 
 .cart-number-hide {

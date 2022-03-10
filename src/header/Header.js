@@ -8,7 +8,7 @@ import { DataContext } from '../context/Context'
 
 function Header({removeOverlay}) {
     const [openModal, setOpenModal] = useState(false)
-    const { quantity } = useContext(DataContext)
+    const { quantity, cartControl } = useContext(DataContext)
     function showModal() {
         setOpenModal(!openModal)
         removeOverlay()
@@ -62,7 +62,7 @@ function Header({removeOverlay}) {
                 </div>
 
                 <div className="product-summary flex">
-                    <button className="cart-summary flex">
+                    <button className="cart-summary flex" onClick={cartControl}>
                         <img className='cart-image' src={cart} alt="" />
                         <span className={`cart-number ${quantity === 0 ? "cart-number-hide" : ""}`}>{quantity}</span>
                     </button>

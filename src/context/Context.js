@@ -8,6 +8,7 @@ export const DataProvider = (props) => {
     const [fetchStatus, setFetchStatus] = useState('idle')
     const [products, setProducts] = useState([])
     const [quantity, setQuantity] = useState(0)
+    const [cartOpen, setCartOpen] = useState(false)
    
     const fetchData = async () => {
         setFetchStatus("loading")
@@ -38,6 +39,10 @@ export const DataProvider = (props) => {
         quantity < 10 ? setQuantity(quantity + 1) : setQuantity(10)
     }
 
+    const cartControl = (evt) => {
+        setCartOpen(!cartOpen)
+    }
+
     useEffect(() => {
         fetchData()
 
@@ -45,7 +50,7 @@ export const DataProvider = (props) => {
     }, [])
  
     return (
-        <DataContext.Provider value={{ products, error, fetchStatus, quantity, increase, reduce}}>
+        <DataContext.Provider value={{ products, error, fetchStatus, quantity, increase, reduce, cartControl, cartOpen}}>
             {props.children}
         </DataContext.Provider>
     )
