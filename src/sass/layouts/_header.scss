@@ -17,12 +17,12 @@
     @include abstract.mQ(42.5rem) {
         gap: abstract.$spacer-24;
         border-block-end: 1px solid #979797;
-        padding-block-end: abstract.$spacer-28;   
+        padding-block-end: abstract.$spacer-28;
     }
 
     @include abstract.mQ(61.25rem) {
-        gap: abstract.$spacer-28;  
-        padding-block-end: abstract.$spacer-16 * 2;    
+        gap: abstract.$spacer-28;
+        padding-block-end: abstract.$spacer-16 * 2;
     }
 }
 
@@ -61,8 +61,8 @@
     width: 24%;
 
     @include abstract.mQ(42.5rem) {
-         width: 100%;
-         justify-content: flex-end;
+        width: 100%;
+        justify-content: flex-end;
     }
 }
 
@@ -79,6 +79,7 @@
     @include abstract.mQ(42.5rem) {
         flex: 1 1 15%;
     }
+
     @include abstract.mQ(61.25rem) {
         justify-content: space-between;
     }
@@ -87,14 +88,6 @@
 .open-modal-nav {
     @include abstract.mQ(42.5rem) {
         display: none;
-    }
-}
-
-.profile-image {
-
-    // width: 24%;
-    @include abstract.mQ(42.5rem) {
-        //  width: 40%;
     }
 }
 
@@ -193,10 +186,30 @@
     font-size: abstract.$fs-18;
     text-decoration: none;
     font-weight: 700;
+    position: relative;
+
+    &:hover,
+    &:focus {
+        &::before {
+            position: absolute;
+            content: "";
+            height: 2px;
+            width: 100%;
+            background-color: abstract.$clr-orange;
+            top: 2rem;
+        }
+    }
 
     @include abstract.mQ(42.5rem) {
         font-size: abstract.$fs-15;
         font-weight: 300;
+
+        &:hover,
+        &:focus {
+            &::before {
+                top: 2rem;
+            }
+        }
     }
 }
 

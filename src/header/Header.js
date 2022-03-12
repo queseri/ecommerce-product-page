@@ -35,7 +35,7 @@ function Header({removeOverlay}) {
                     </button>
 
                     <div className="logo-container">
-                        <img className='logo-image' src={logo} alt="" />
+                        <img className='logo-image' src={logo} alt="" aria-hidden={true}/>
                     </div>
                 </div>
 
@@ -64,10 +64,12 @@ function Header({removeOverlay}) {
                 <div className="product-summary flex">
                     <button className="cart-summary flex" onClick={cartControl}>
                         <img className='cart-image' src={cart} alt="" />
+                        <span className="sr-only">number of items in the cart</span>
                         <span className={`cart-number ${quantity === 0 ? "cart-number-hide" : ""}`}>{quantity}</span>
                     </button>
                     <button className="profile">
                         <img className='profile-image' src={profile} alt="" />
+                        <span className="sr-only">view the profile</span>
                     </button>
                 </div>
 

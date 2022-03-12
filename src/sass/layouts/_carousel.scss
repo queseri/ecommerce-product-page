@@ -38,8 +38,7 @@
     width: 100%;
     object-fit: cover;
 
-    @include abstract.mQ(42.5rem) {
-      // height: auto;
+    @include abstract.mQ(42.5rem) {      
         border-radius: 15px;
     }
 
@@ -70,6 +69,10 @@
     align-items: center;
     border: none;
     background-color: abstract.$clr-white;
+
+    @include abstract.mQ(42.5rem) {
+       display: none;
+    }
 }
 
 .carousel-button-left {

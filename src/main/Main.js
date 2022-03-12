@@ -6,6 +6,8 @@ import Delete from '../images/icon-delete.svg'
 import useWindowSize from './useWindowResize'
 import Cart from '../images/icon-cart.svg'
 import { DataContext } from '../context/Context'
+import Checkout from './Checkout'
+import Primary from './Primary'
 
 function Main() {
     const { products, error, fetchStatus, reduce, increase, quantity, cartOpen } = useContext(DataContext)
@@ -15,8 +17,8 @@ function Main() {
     const [cost, setCost] = useState(250)
     const [netPrice, setNetPrice] = useState(cost - (cost * rate))
     const [cartData, setCartData] = useState(3)
-    console.log(products)
 
+    //  console.log(products)
     const moveSlide = (track, currentSlide, targetSlide) => {
         track.style.transform = "translateX(-" + targetSlide.style.left + ")"
         currentSlide.classList.remove("current-slide")
@@ -51,6 +53,17 @@ function Main() {
         setCartData(prevSlide.dataset.id - 1)
     }
 
+    const selectCarousel = (evt) => {
+        const track = document.querySelector(".carousel-track")
+        const dots = Array.from(document.querySelectorAll(".carousel-indicator"))
+        const slides = Array.from(document.querySelectorAll(".carousel-slide"))
+        const targetDot = evt.target.closest("button")
+        const currentSlide = document.querySelector(".current-slide")
+        const targetIndex = dots.findIndex(dot => dot === targetDot)
+        const targetSlide = slides[targetIndex]
+        moveSlide(track, currentSlide, targetSlide)
+    }
+
     if (fetchStatus === 'idle' || fetchStatus === 'loading' || products === 'undefined' || products.length === 0) {
         return <div className='loading'>
             <p className='loading-title'>Loading...</p>
@@ -72,10 +85,12 @@ function Main() {
                         <button className='carousel-button carousel-button-left'
                             onClick={previousImage}>
                             <img src={Left} alt="" />
+                            <span className="sr-only">visit previous image</span>
                         </button>
                         <button className='carousel-button carousel-button-right'
                             onClick={nextImage}>
                             <img src={Right} alt="" />
+                            <span className="sr-only">go to next image</span>
                         </button>
                         <ul className='carousel-track' ref={sliderRef}>
                             {products && products.map((product, idx) => <li key={product._id}
@@ -83,7 +98,7 @@ function Main() {
                                 data-cost={product.price}
                                 className={`carousel-slide  ${idx === 0 ? "current-slide" : ""}`}
                                 style={{ left: `${idx * size.width}px` }}>
-                                <img className='carousel-image' src={product.image} alt=""
+                                <img className='carousel-image' src={product.image} alt={`view product ${product.name}`}
                                 />
                             </li>)}
                         </ul>
@@ -91,87 +106,28 @@ function Main() {
 
                     <ul className="carousel-nav carousel-nav-hide">
                         {products && products.map((product, idx) => <li key={product._id}>
-                            <button className='carousel-indicator'>
+                            <button className='carousel-indicator' data-id={product.id} onClick={selectCarousel}>
                                 <img className='carousel-thumb' src={product.thubmnail} alt="" />
+                                <span className="sr-only">Select product {product.name}</span>
                             </button>
                         </li>)}
 
                     </ul>
                 </div>
-                <div className='primary-content'>
-                    <div className="primary-content-container">
-                        <h1 className='main-title'>Sneaker company</h1>
-                        <h2 className='secondary-title'>Fall Limited Edition Sneakers</h2>
-                        <p className='main-content'>
-                            These low-profile sneakers are your perfect casual wear companion. Featuring a
-                            durable rubber outer sole, they'll withstand everything the weather can offer.
-                        </p>
-                    </div>
-                    <div className='form'>
-                        <div className="display">
-                            <p className='product-discounted-cost'>
-                                <strong className="discounted-cost">
-                                    {netPrice.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
-                                </strong>
-                                <span className='sr-only'>after</span>
-                                <strong className='discount-rate'>50%</strong>
-                            </p>
-                            <p className='init-cost-container'>
-                                <span className="sr-only">cost before discount is</span>
-                                <strong className='init-cost'>
-                                    <s>
-                                        {cost.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
-                                    </s>
-                                </strong>
-                            </p>
-                        </div>
-                        <div className="add-to-cart-container">
-                            <div className='quantity-control'>
-                                <button className="btn btn-reduce" onClick={reduce}>
-                                    -
-                                </button>
-                                <span className='quantity'>{quantity}</span>
-                                <button className="btn btn-increase" onClick={increase}>
-                                    +
-                                </button>
-                            </div>
-                            <button className='btn-add-to-cart'>
-                                <img src={Cart} alt="" />
-                                <span>Add to cart</span>
-                            </button>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-            <div className={`checkout-container ${cartOpen ? "" : "hide-checkout"}  `}>
-                <h3 className="checkout-title">
-                    cart
-                </h3>
-
-                {quantity <= 0 ? <div><p>The cart is empty</p></div> :
-                    <div className="checkout-main-container">
-                        <div className='checkout flex'>
-                            <img src={products[cartData].thubmnail} alt="" />
-                            <div className='checkout-list flex'>
-                                <div className="checkout-separator">
-                                    <h4 className='checkout-list-title'>Fall Limited Edition Sneakers</h4>
-                                    <p className='checkout-list-details'>{`${cost.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
-                                    *   ${quantity} =
-                                    ${(cost * quantity).toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}`}
-                                    </p>
-                                </div>
-                                <button className='delete-cart'>
-                                    <img src={Delete} alt="" />
-                                    <span className='sr-only'>clear cart items</span>
-                                </button>
-                            </div>
-                        </div>
-                        <button className='btn-checkout'>Checkout</button>
-                    </div>
-                }
+                <Primary increase={increase} reduce={reduce} quantity={quantity} cart={Cart}
+                    netprice={netPrice.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
+                    cost={cost.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
+                />
 
             </div>
+
+            <Checkout cartOpen={cartOpen} src={products[cartData].thubmnail}
+                cost={`${cost.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
+                *   ${quantity} =
+                ${(cost * quantity).toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}`}
+                srcDelete={Delete} quantity={quantity} />
+
         </main>
     )
 }

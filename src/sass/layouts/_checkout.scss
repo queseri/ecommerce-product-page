@@ -13,11 +13,20 @@
     top: 0;
     padding: .5rem 1rem;
     border-radius: 10px;
-
+    box-shadow: 1px 1px 1px 1px abstract.$clr-med-grey;
     img {
         width: 3.125rem;
         height: 3.125rem;
         border-radius: 4px;
+    }
+
+    @include abstract.mQ(42.5rem) {
+       left: auto;
+       right: 5%;
+    }
+
+    @include abstract.mQ(61.25rem) {
+        right: 0;
     }
 }
 
