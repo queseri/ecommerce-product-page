@@ -3,19 +3,15 @@
 
 
 .primary-content {
-    margin-block-start: 30%;
+    margin-block-start: 1.5rem;
     z-index: 1;
     position: relative;
     padding-inline: abstract.$spacer-24;
 
-    @include abstract.mQ(25.9375rem) {
-        margin-block-start: 50%;
-    }
-
-    @include abstract.mQ(38.75rem) {
+    @include abstract.mQ(42.5rem) {
         margin-block-start: 0;
         padding-inline: 0;
-        flex: 1 1 60%;
+        flex: 1 1 50%;
     }
 }
 
@@ -23,16 +19,33 @@
     color: abstract.$clr-orange;
     font-size: abstract.$fs-12;
     text-transform: uppercase;
+
+    @include abstract.mQ(42.5rem) { 
+        font-size: abstract.$fs-13;
+    }
 }
 
 .secondary-title {
     font-size: abstract.$fs-28;
     line-height: 1.3;
     color: abstract.$clr-almost-black;
+    padding-block: 0.5rem;
+
+    @include abstract.mQ(61.25rem) { 
+        font-size: abstract.$fs-44;
+        line-height: 1.1;
+    }
 }
 
 .main-content {
     color: abstract.$clr-med-grey;
+    line-height: 1.67;
+    font-size: abstract.$fs-15;
+
+    @include abstract.mQ(61.25rem) { 
+        font-size: abstract.$fs-16;
+        line-height: 1.6;
+    }
 }
 
 .discounted-cost {
@@ -44,12 +57,21 @@
 
 .discount-rate {
     color: abstract.$clr-orange;
+    background-color: #ffeee2;
+    padding: 0.25rem;
+    border-radius: 10px;
 }
 
 .display {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    @include abstract.mQ(61.25rem) {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: baseline;
+    }
 }
 
 .init-cost {
@@ -77,8 +99,23 @@
     background-color: abstract.$clr-light-grey;
     border-radius: 10px;
     padding-block: .5rem;
-    padding-inline: 1rem;
-    margin-bottom: 1rem;
+    padding-inline: abstract.$spacer-16;
+    margin-block-end: abstract.$spacer-24;
+
+    @include abstract.mQ(61.25rem) {
+        margin-block-end: 0;
+        flex: 1 1 33%;
+    }
+}
+
+.add-to-cart-container {
+    margin-block: abstract.$spacer-24;
+
+    @include abstract.mQ(61.25rem) {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
 }
 
 .btn-add-to-cart {
@@ -88,9 +125,11 @@
     border-radius: 10px;
     justify-content: center;
     align-items: center;
-    padding-block: 1rem;
+    padding-block: abstract.$spacer-16;
     border: none;
     margin-bottom: 2rem;
+    gap: 0.75rem;
+    box-shadow: 7px 16px 14px 5px #ffeee7;
 
     img {
         filter: brightness(100);
@@ -99,4 +138,14 @@
     span {
         color: abstract.$clr-white;
     }
+
+    @include abstract.mQ(61.25rem) {
+        margin-block-end: 0;
+        flex: 1 1 66%;
+    }
+}
+
+.form {
+    padding-block-start: abstract.$spacer-16;
+    padding-bottom: 5rem;
 }

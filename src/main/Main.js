@@ -62,7 +62,7 @@ function Main() {
             <p className='loading-title loading-error-title'>Something went wrong!!</p>
         </div>
     }
-
+    // size.width = slideRef.current.offsetWidth
     return (
         <main className='main'>
             <div className="main-container">
@@ -125,20 +125,21 @@ function Main() {
                                 </strong>
                             </p>
                         </div>
-                        <div className='quantity-control'>
-                            <button className="btn btn-reduce" onClick={reduce}>
-                                -
-                            </button>
-                            <span className='quantity'>{quantity}</span>
-                            <button className="btn btn-increase" onClick={increase}>
-                                +
+                        <div className="add-to-cart-container">
+                            <div className='quantity-control'>
+                                <button className="btn btn-reduce" onClick={reduce}>
+                                    -
+                                </button>
+                                <span className='quantity'>{quantity}</span>
+                                <button className="btn btn-increase" onClick={increase}>
+                                    +
+                                </button>
+                            </div>
+                            <button className='btn-add-to-cart'>
+                                <img src={Cart} alt="" />
+                                <span>Add to cart</span>
                             </button>
                         </div>
-
-                        <button className='btn-add-to-cart'>
-                            <img src={Cart} alt="" />
-                            <span>Add to cart</span>
-                        </button>
                     </div>
 
                 </div>
@@ -147,25 +148,28 @@ function Main() {
                 <h3 className="checkout-title">
                     cart
                 </h3>
+
                 {quantity <= 0 ? <div><p>The cart is empty</p></div> :
-                    <div className='checkout flex'>
-                        <img src={products[cartData].thubmnail} alt="" />
-                        <div className='checkout-list flex'>
-                            <div className="checkout-separator">
-                                <h4 className='checkout-list-title'>Fall Limited Edition Sneakers</h4>
-                                <p className='checkout-list-details'>{`${cost.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
+                    <div className="checkout-main-container">
+                        <div className='checkout flex'>
+                            <img src={products[cartData].thubmnail} alt="" />
+                            <div className='checkout-list flex'>
+                                <div className="checkout-separator">
+                                    <h4 className='checkout-list-title'>Fall Limited Edition Sneakers</h4>
+                                    <p className='checkout-list-details'>{`${cost.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
                                     *   ${quantity} =
                                     ${(cost * quantity).toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}`}
-                                </p>
+                                    </p>
+                                </div>
+                                <button className='delete-cart'>
+                                    <img src={Delete} alt="" />
+                                    <span className='sr-only'>clear cart items</span>
+                                </button>
                             </div>
-                            <button className='delete-cart'>
-                                <img src={Delete} alt="" />
-                                <span className='sr-only'>clear cart items</span>
-                            </button>
                         </div>
+                        <button className='btn-checkout'>Checkout</button>
                     </div>
                 }
-                <button className='btn-checkout'>Checkout</button>
 
             </div>
         </main>

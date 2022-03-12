@@ -7,34 +7,45 @@
 
 .container {
     padding-inline: abstract.$spacer-24;
+    margin-inline: auto;
+    max-width: 69.375rem;
 
-    @include abstract.mQ(38.75rem) {
+    @include abstract.mQ(42.5rem) {
         padding-inline: abstract.$spacer-28;
     }
 
     @include abstract.mQ(61.25rem) {
-        padding-inline: 10.3125rem;
+        padding-inline: 0;
     }
+
 }
 
 .main {
     position: relative;
-    @include abstract.mQ(38.75rem) {
-      //  display: flex;
-       padding-inline: abstract.$spacer-28;
-     
+    margin-inline: auto;
+    max-width: 63.4375rem;
+    @include abstract.mQ(42.5rem) {     
+        padding-inline: abstract.$spacer-28;
     }
 
     @include abstract.mQ(61.25rem) {
-        padding-inline: 10.3125rem;
+       margin-block-start: abstract.$spacer-16 * 4;
+       margin-block-end: abstract.$spacer-16 * 4;
     }
+
 }
 
 .main-container {
-    @include abstract.mQ(38.75rem) {
-        display: flex;  
-        gap: abstract.$spacer-24;     
+    @include abstract.mQ(42.5rem) {
+        display: flex;
+        gap: abstract.$spacer-24;
     }
+    
+    @include abstract.mQ(61.25rem) {
+        gap: 7.5rem;
+        align-items: center;
+    }
+
 }
 
 .loading {

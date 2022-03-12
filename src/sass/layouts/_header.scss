@@ -16,6 +16,13 @@
 
     @include abstract.mQ(42.5rem) {
         gap: abstract.$spacer-24;
+        border-block-end: 1px solid #979797;
+        padding-block-end: abstract.$spacer-28;   
+    }
+
+    @include abstract.mQ(61.25rem) {
+        gap: abstract.$spacer-28;  
+        padding-block-end: abstract.$spacer-16 * 2;    
     }
 }
 
@@ -54,17 +61,27 @@
     width: 24%;
 
     @include abstract.mQ(42.5rem) {
-        width: 40%;
+         width: 100%;
+         justify-content: flex-end;
     }
+}
 
+.profile-image {
     @include abstract.mQ(42.5rem) {
-        width: 50%;
+        max-width: 3.125rem;
     }
 }
 
 .product-summary {
     justify-content: flex-end;
     gap: .75rem;
+
+    @include abstract.mQ(42.5rem) {
+        flex: 1 1 15%;
+    }
+    @include abstract.mQ(61.25rem) {
+        justify-content: space-between;
+    }
 }
 
 .open-modal-nav {
@@ -83,6 +100,10 @@
 
 .menu-control {
     gap: abstract.$spacer-19;
+
+    @include abstract.mQ(42.5rem) {
+        flex: 1 1 15%;
+    }
 }
 
 .modal-menu {
@@ -101,6 +122,7 @@
         box-shadow: none;
         left: auto;
         top: auto;
+        flex: 1 1 70%;
     }
 }
 
@@ -117,7 +139,7 @@
     align-items: center;
     background: abstract.$clr-orange;
     border-radius: 50%;
-    color: white;
+    color: abstract.$clr-white;
     display: flex;
     font-size: 0.625rem;
     height: 1rem;
@@ -160,6 +182,10 @@
         margin-top: auto;
         margin-left: auto;
     }
+
+    @include abstract.mQ(61.25rem) {
+        gap: abstract.$spacer-28;
+    }
 }
 
 .nav-list-item-btn {
@@ -167,6 +193,11 @@
     font-size: abstract.$fs-18;
     text-decoration: none;
     font-weight: 700;
+
+    @include abstract.mQ(42.5rem) {
+        font-size: abstract.$fs-15;
+        font-weight: 300;
+    }
 }
 
 .show-overlay {

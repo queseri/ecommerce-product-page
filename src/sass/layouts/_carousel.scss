@@ -2,34 +2,59 @@
 @use '../abstract';
 
 .carousel {
-    position: relative;   
+    position: relative;
     width: 100%;
     margin: 0 auto;
 
-     @include abstract.mQ(38.75rem) {
+    @include abstract.mQ(42.5rem) {
         flex: 1 1 50%;
     }
 }
 
 .carousel-track {
-    position: relative;   
+    position: relative;
     transition: transform 250ms ease-in;
-    @include abstract.mQ(38.75rem) {
+    min-height: 18.75rem;   
+
+    @include abstract.mQ(42.5rem) {
         transition: none;
+        min-height: 24.75rem;
+    }
+
+    @include abstract.mQ(61.25rem) {
+        min-height: 27.8125rem;
     }
 }
 
 .carousel-slide {
-    position: absolute;
-    height: 100%;
+    position: absolute;   
     width: 100%;
     top: 0;
     bottom: 0;
 }
 
+.carousel-image {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+    @include abstract.mQ(42.5rem) {
+      // height: auto;
+        border-radius: 15px;
+    }
+
+    @include abstract.mQ(61.25rem) {
+        height: 100%;
+    }
+}
+
 .carousel-track-container {
     min-height: 18.75rem;
     position: relative;
+
+    @include abstract.mQ(42.5rem) {
+        min-height: 27.8125rem;
+    }
 }
 
 .carousel-button {
@@ -48,25 +73,33 @@
 }
 
 .carousel-button-left {
-	left: 1rem;
+    left: 1rem;
 }
 
 .carousel-button-right {
     right: 1rem;
 }
 
-.carousel-nav {
-    //background-color: yellow;
-    // position: relative;
+.carousel-nav {    
     display: flex;
     justify-content: center;
     gap: .5rem;
     width: 70%;
     margin: auto;
+    @include abstract.mQ(42.5rem) {
+        width: 100%;
+    }
 }
 
 .carousel-nav-hide {
     display: none;
+    @include abstract.mQ(42.5rem) {
+        display: flex;
+    }
+
+    @include abstract.mQ(61.25rem) {
+        margin-block-start: abstract.$spacer-28;
+    }
 }
 
 .carousel-indicator {
