@@ -1,5 +1,6 @@
 import React from 'react'
 import { useContext, useState, useRef, useEffect } from 'react'
+//import "../../react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Left from '../images/icon-previous.svg'
 import Right from '../images/icon-next.svg'
 import Delete from '../images/icon-delete.svg'
@@ -8,6 +9,7 @@ import Cart from '../images/icon-cart.svg'
 import { DataContext } from '../context/Context'
 import Checkout from './Checkout'
 import Primary from './Primary'
+import { Rings } from  'react-loader-spinner'
 
 function Main() {
     const { products, error, fetchStatus, reduce, increase, quantity, cartOpen } = useContext(DataContext)
@@ -65,9 +67,9 @@ function Main() {
     }
 
     if (fetchStatus === 'idle' || fetchStatus === 'loading' || products === 'undefined' || products.length === 0) {
-        return <div className='loading'>
-            <p className='loading-title'>Loading...</p>
-        </div>
+        return   <div className='loading'>
+             <Rings color="#00BFFF" height={160} width={160} />
+        </div> 
     }
 
     if (fetchStatus === error) {
