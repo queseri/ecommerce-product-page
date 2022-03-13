@@ -60,7 +60,7 @@ function Primary(props) {
 
                     </div>
 
-                    <button className='btn-add-to-cart'>
+                    <button className='btn btn-add-to-cart'>
                         <img src={props.cart} alt="" />
                         <span>Add to cart</span>
                     </button>

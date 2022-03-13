@@ -9,11 +9,12 @@
     left: 0;
     z-index: 1;
     left: 50%;
-    margin-left: -45%;
+    margin-inline-start: -45%;
+    margin-block-start: 0.5rem;
     top: 0;
-    padding: .5rem 1rem;
     border-radius: 10px;
     box-shadow: 1px 1px 1px 1px abstract.$clr-med-grey;
+
     img {
         width: 3.125rem;
         height: 3.125rem;
@@ -21,12 +22,14 @@
     }
 
     @include abstract.mQ(42.5rem) {
-       left: auto;
-       right: 5%;
+        left: auto;
+        right: 5%;
+        margin-block-start: -2rem;
     }
 
     @include abstract.mQ(61.25rem) {
         right: 0;
+        margin-block-start: -5rem;
     }
 }
 
@@ -34,9 +37,29 @@
     display: none;
 }
 
+.checkout-main-container {
+    border-block-start: 1px solid abstract.$clr-almost-black;
+}
+
+.checkout-title,
+.checkout-detailled {
+    padding: 1.5rem;
+}
+
+.checkout-detailled {
+    justify-content: space-evenly;
+}
+
 .delete-cart {
     background-color: transparent;
     border: none;
+
+    &:focus,
+    &:hover {
+        cursor: pointer;
+        outline: dashed currentColor;
+        outline-offset: 0.025em;
+    }
 
     img {
         width: 0.875rem;
@@ -56,11 +79,20 @@
     background-color: abstract.$clr-orange;
     border-radius: 10px;
     border: none;
-    color:abstract.$clr-white;
-    display: block;    
+    color: abstract.$clr-white;
+    display: block;
     max-width: 20rem;
     margin-block: 1.5rem;
     padding: 1rem;
-    width: 100%;   
-   
+    width: 100%;
+    margin-inline: auto;
+}
+
+.checkout-empty {
+    border-block-start: 1px solid abstract.$clr-almost-black;
+    justify-content: center;
+}
+
+.cart-empty-text {
+    padding-block: 4rem;
 }

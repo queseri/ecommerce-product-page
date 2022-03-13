@@ -84,6 +84,13 @@
     color: abstract.$clr-orange;
     font-size: 1.625rem;
     font-weight: 700;
+
+    &:focus,
+    &:hover {
+        cursor: pointer;
+        outline: dashed currentColor;
+        outline-offset: 0.025em;
+    }
 }
 
 .quantity {

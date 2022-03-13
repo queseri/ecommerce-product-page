@@ -12,7 +12,7 @@ import Primary from './Primary'
 import { Rings } from  'react-loader-spinner'
 
 function Main() {
-    const { products, error, fetchStatus, reduce, increase, quantity, cartOpen } = useContext(DataContext)
+    const { products, error, fetchStatus, reduce, increase, quantity, cartOpen, resetCart } = useContext(DataContext)
     const sliderRef = useRef(null)
     const size = useWindowSize();
     const rate = .5
@@ -124,7 +124,7 @@ function Main() {
 
             </div>
 
-            <Checkout cartOpen={cartOpen} src={products[cartData].thubmnail}
+            <Checkout cartOpen={cartOpen} src={products[cartData].thubmnail} clearCart={resetCart}
                 cost={`${cost.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
                 *   ${quantity} =
                 ${(cost * quantity).toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}`}
