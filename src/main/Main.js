@@ -1,5 +1,5 @@
 import React from 'react'
-import { useContext, useState, useRef, useEffect } from 'react'
+import { useContext, useRef, useEffect } from 'react'
 //import "../../react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Left from '../images/icon-previous.svg'
 import Right from '../images/icon-next.svg'
@@ -9,67 +9,24 @@ import Cart from '../images/icon-cart.svg'
 import { DataContext } from '../context/Context'
 import Checkout from './Checkout'
 import Primary from './Primary'
-import { Rings } from  'react-loader-spinner'
+import { Rings } from 'react-loader-spinner'
+import CarouselBtn from './CarouselBtn'
 
 function Main() {
-    const { products, error, fetchStatus, reduce, increase, quantity, cartOpen, resetCart } = useContext(DataContext)
+    const { products, error, fetchStatus, reduce, increase, quantity,
+        cartOpen, resetCart, selectCarousel, previousImage, nextImage,
+        netPrice, cartData, cost, toggleModal } = useContext(DataContext)
     const sliderRef = useRef(null)
     const size = useWindowSize();
-    const rate = .5
-    const [cost, setCost] = useState(250)
-    const [netPrice, setNetPrice] = useState(cost - (cost * rate))
-    const [cartData, setCartData] = useState(3)
-
-    //  console.log(products)
-    const moveSlide = (track, currentSlide, targetSlide) => {
-        track.style.transform = "translateX(-" + targetSlide.style.left + ")"
-        currentSlide.classList.remove("current-slide")
-        targetSlide.classList.add("current-slide")
-    }
-
 
     useEffect(() => {
 
-    }, [size])
-
-    const nextImage = () => {
-        const currentSlide = document.querySelector(".current-slide")
-        const nextSlide = currentSlide.nextElementSibling
-        const track = document.querySelector(".carousel-track")
-        if (nextSlide === null) return
-        moveSlide(track, currentSlide, nextSlide)
-        setCost(parseInt(nextSlide.dataset.cost))
-        setNetPrice(cost - (cost * rate))
-        setCartData(parseInt(nextSlide.dataset.id - 1))
-        console.log(nextSlide)
-    }
-
-    const previousImage = () => {
-        const currentSlide = document.querySelector(".current-slide")
-        const prevSlide = currentSlide.previousElementSibling
-        const track = document.querySelector(".carousel-track")
-        if (prevSlide === null) return
-        moveSlide(track, currentSlide, prevSlide)
-        setCost(parseInt(prevSlide.dataset.cost))
-        setNetPrice(cost - (cost * rate))
-        setCartData(prevSlide.dataset.id - 1)
-    }
-
-    const selectCarousel = (evt) => {
-        const track = document.querySelector(".carousel-track")
-        const dots = Array.from(document.querySelectorAll(".carousel-indicator"))
-        const slides = Array.from(document.querySelectorAll(".carousel-slide"))
-        const targetDot = evt.target.closest("button")
-        const currentSlide = document.querySelector(".current-slide")
-        const targetIndex = dots.findIndex(dot => dot === targetDot)
-        const targetSlide = slides[targetIndex]
-        moveSlide(track, currentSlide, targetSlide)
-    }
+    }, [size.width])    
 
     if (fetchStatus === 'idle' || fetchStatus === 'loading' || products === 'undefined' || products.length === 0) {
-        return   <div className='loading'>
-             <Rings color="#00BFFF" height={160} width={160} />
-        </div> 
+        return <div className='loading'>
+            <Rings color="#00BFFF" height={160} width={160} />
+        </div>
     }
 
     if (fetchStatus === error) {
@@ -84,24 +41,22 @@ function Main() {
                 <div className='carousel' tabIndex="-1">
 
                     <div className='carousel-track-container'>
-                        <button className='carousel-button carousel-button-left'
-                            onClick={previousImage}>
-                            <img src={Left} alt="" />
-                            <span className="sr-only">visit previous image</span>
-                        </button>
-                        <button className='carousel-button carousel-button-right'
-                            onClick={nextImage}>
-                            <img src={Right} alt="" />
-                            <span className="sr-only">go to next image</span>
-                        </button>
+                        <CarouselBtn leftDirection={true} onClick={previousImage} src={Left}
+                            text="visit previous image" />
+
+                        <CarouselBtn leftDirection={false} onClick={nextImage} src={Right}
+                            text="view the next slide" />
+
                         <ul className='carousel-track' ref={sliderRef}>
                             {products && products.map((product, idx) => <li key={product._id}
                                 data-id={product.id}
                                 data-cost={product.price}
                                 className={`carousel-slide  ${idx === 0 ? "current-slide" : ""}`}
                                 style={{ left: `${idx * size.width}px` }}>
-                                <img className='carousel-image' src={product.image} alt={`view product ${product.name}`}
-                                />
+                                <button className='carousel-image-btn' onClick={toggleModal}>
+                                    <img className='carousel-image' src={product.image}
+                                        alt={`view product ${product.name}`} />
+                                </button>
                             </li>)}
                         </ul>
                     </div>
@@ -113,8 +68,8 @@ function Main() {
                                 <span className="sr-only">Select product {product.name}</span>
                             </button>
                         </li>)}
-
                     </ul>
+                    
                 </div>
 
                 <Primary increase={increase} reduce={reduce} quantity={quantity} cart={Cart}

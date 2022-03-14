@@ -1,0 +1,45 @@
+@use 'sass:math';
+@use '../abstract';
+
+.main-modal {
+    display: none;
+    @include abstract.mQ(61.25rem) {
+        padding-block: 5rem;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 0;
+        min-height: 150vh;
+        background-color: abstract.$clr-almost-black;
+        z-index: 100;
+        opacity: 0.97;
+    }
+}
+
+.show-modal {
+    display: flex;
+    flex-direction: column;   
+}
+
+.carousel-track-modal {
+    width: 34.375rem;
+    height: 34.375rem;
+}
+
+.close-modal-btn {
+	right: 0rem;
+	position: absolute;
+	top: -2rem;
+    border: none;
+    background-color: transparent;
+
+    img {
+        filter: brightness(100);
+    }
+}
+
+.modal-btn-control {
+    display: flex;
+}

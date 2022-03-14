@@ -144,6 +144,7 @@
 
     span {
         color: abstract.$clr-white;
+        font-size: abstract.$fs-16;
     }
 
     @include abstract.mQ(61.25rem) {

@@ -9,6 +9,13 @@ export const DataProvider = (props) => {
     const [products, setProducts] = useState([])
     const [quantity, setQuantity] = useState(0)
     const [cartOpen, setCartOpen] = useState(false)
+    const [showModal, setShowModal] = useState(false)
+    const [dataNum, setDataNum] = useState(0)
+
+    const rate = .5
+    const [cost, setCost] = useState(250)
+    const [netPrice, setNetPrice] = useState(cost - (cost * rate))
+    const [cartData, setCartData] = useState(3)
 
     const fetchData = async () => {
         setFetchStatus("loading")
@@ -47,6 +54,78 @@ export const DataProvider = (props) => {
         setCartOpen(!cartOpen)
     }
 
+    const toggleModal = (evt) => {
+
+        if (!showModal) {
+            const target = evt.target.closest("li").dataset.id
+            setDataNum(target)
+            console.log(target)
+        }
+
+        setShowModal(!showModal)
+    }
+
+    const moveSlide = (track, currentSlide, targetSlide) => {
+        track.style.transform = "translateX(-" + targetSlide.style.left + ")"
+        currentSlide.classList.remove("current-slide")
+        targetSlide.classList.add("current-slide")
+    }
+
+    const nextModalImage = () => {
+        console.log(dataNum)
+        console.log(products.length)
+        if (parseInt(dataNum) > products.length - 1) {
+            setDataNum(1)
+        } else {
+            setDataNum(parseInt(dataNum) + 1)
+        }
+    }
+
+    const previousModalImage = () => {
+        console.log(dataNum)
+        console.log(products.length)
+        if (parseInt(dataNum) <= 1) {
+            setDataNum(products.length)
+        } else {
+            setDataNum(parseInt(dataNum) - 1)
+        }
+    }
+
+    const nextImage = (evt) => {
+        const currentSlide = document.querySelector(".current-slide")
+        const nextSlide = currentSlide.nextElementSibling
+        const track = document.querySelector(".carousel-track")
+        if (nextSlide === null) return
+        moveSlide(track, currentSlide, nextSlide)
+        setCost(parseInt(nextSlide.dataset.cost))
+        setNetPrice(cost - (cost * rate))
+        setCartData(parseInt(nextSlide.dataset.id - 1))
+        console.log(evt)
+    }
+
+    const previousImage = (evt) => {
+        const currentSlide = document.querySelector(".current-slide")
+        const prevSlide = currentSlide.previousElementSibling
+        const track = document.querySelector(".carousel-track")
+        if (prevSlide === null) return
+        moveSlide(track, currentSlide, prevSlide)
+        setCost(parseInt(prevSlide.dataset.cost))
+        setNetPrice(cost - (cost * rate))
+        setCartData(prevSlide.dataset.id - 1)
+        console.log(evt)
+    }
+
+    const selectCarousel = (evt) => {
+        const track = document.querySelector(".carousel-track")
+        const dots = Array.from(document.querySelectorAll(".carousel-indicator"))
+        const slides = Array.from(document.querySelectorAll(".carousel-slide"))
+        const targetDot = evt.target.closest("button")
+        const currentSlide = document.querySelector(".current-slide")
+        const targetIndex = dots.findIndex(dot => dot === targetDot)
+        const targetSlide = slides[targetIndex]
+        moveSlide(track, currentSlide, targetSlide)
+    }
+
     useEffect(() => {
         fetchData()
 
@@ -55,8 +134,9 @@ export const DataProvider = (props) => {
 
     return (
         <DataContext.Provider value={{
-            products, error, fetchStatus, quantity, increase,
-            reduce, cartControl, cartOpen, resetCart
+            products, error, fetchStatus, quantity, increase, dataNum,
+            reduce, cartControl, cartOpen, resetCart, toggleModal, nextModalImage, previousModalImage,
+            selectCarousel, previousImage, nextImage, netPrice, cartData, cost, showModal
         }}>
             {props.children}
         </DataContext.Provider>
