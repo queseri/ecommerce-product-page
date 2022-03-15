@@ -10,11 +10,11 @@ import CarouselBtn from './CarouselBtn'
 function MainModal() {
     // const size = useWindowSize();
     const { products, showModal, dataNum, toggleModal, nextImage, previousImage } = useContext(DataContext)
-    console.log(dataNum)
+   // console.log(dataNum)
 
     const productList = products && products.filter((product, idx) => idx === parseInt(dataNum ))
 
-    console.log(productList)
+    //console.log(productList)
     return (
         <div className={`main-modal ${showModal ? "show-modal" : ""}`}>
             <div className='carousel-track-container carousel-track-container-modal'>

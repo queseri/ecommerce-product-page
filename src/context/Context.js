@@ -58,74 +58,54 @@ export const DataProvider = (props) => {
 
         if (!showModal) {
             const target = parseInt(evt.target.closest(".carousel-slide").dataset.id)
-            setDataNum(target - 1)           
+            setDataNum(target - 1)
             console.log(dataNum)
-            console.log(`current slide number is ${dataNum + 1}` )
+            console.log(`current slide number is ${dataNum + 1}`)
         }
 
         setShowModal(!showModal)
-    }
+    }   
 
-    const moveSlide = (track, currentSlide, targetSlide) => {
-        track.style.transform = "translateX(-" + targetSlide.style.left + ")"
-        currentSlide.classList.remove("current-slide")
-        targetSlide.classList.add("current-slide")
+    const updateCost = () => {
+        const targetData = document.querySelector(".carousel-slide").dataset.cost
+        setCost(parseInt(targetData))
+        setNetPrice(cost - (cost * rate))
+        setCartData(dataNum)
     }
 
     const nextImage = () => {
-        console.log(`current slide number is ${dataNum + 1}` )
-        console.log(`length of array ${products.length}` )
+
         if (parseInt(dataNum) >= products.length - 1) {
             setDataNum(0)
         } else {
             setDataNum(parseInt(dataNum) + 1)
         }
+        updateCost()
     }
 
     const previousImage = () => {
-        console.log(dataNum)
-        console.log(products.length)
+       
         if (parseInt(dataNum) <= 0) {
-            setDataNum(products.length - 1 )
+            setDataNum(products.length - 1)
         } else {
             setDataNum(parseInt(dataNum) - 1)
         }
-    }
-/*
-    const nextImage = (evt) => {
-        const currentSlide = document.querySelector(".current-slide")
-        const nextSlide = currentSlide.nextElementSibling
-        const track = document.querySelector(".carousel-track")
-        if (nextSlide === null) return
-        moveSlide(track, currentSlide, nextSlide)
-        setCost(parseInt(nextSlide.dataset.cost))
-        setNetPrice(cost - (cost * rate))
-        setCartData(parseInt(nextSlide.dataset.id - 1))
-        console.log(evt)
-    }
 
-    const previousImage = (evt) => {
-        const currentSlide = document.querySelector(".current-slide")
-        const prevSlide = currentSlide.previousElementSibling
-        const track = document.querySelector(".carousel-track")
-        if (prevSlide === null) return
-        moveSlide(track, currentSlide, prevSlide)
-        setCost(parseInt(prevSlide.dataset.cost))
-        setNetPrice(cost - (cost * rate))
-        setCartData(prevSlide.dataset.id - 1)
-        console.log(evt)
+       updateCost()
     }
-*/
-    const selectCarousel = (evt) => {
-        const track = document.querySelector(".carousel-track")
-        const dots = Array.from(document.querySelectorAll(".carousel-indicator"))
-        const slides = Array.from(document.querySelectorAll(".carousel-slide"))
-        const targetDot = evt.target.closest("button")
-        const currentSlide = document.querySelector(".current-slide")
-        const targetIndex = dots.findIndex(dot => dot === targetDot)
-        const targetSlide = slides[targetIndex]
-        moveSlide(track, currentSlide, targetSlide)
-    }
+  
+
+    const dots = Array.from(document.querySelectorAll(".carousel-indicator-main"))
+    dots.forEach(dot => {
+        dot.addEventListener("click", function () {
+            const targetData = document.querySelector(".carousel-slide").dataset.cost
+            console.log(targetData)
+           // setDataNum(parseInt(dot.dataset.id - 1))
+           setDataNum(parseInt(dot.dataset.id - 1))
+            setCost(parseInt(targetData))
+            setNetPrice(cost - (cost * rate))
+        })
+    })
 
     useEffect(() => {
         fetchData()
@@ -136,8 +116,8 @@ export const DataProvider = (props) => {
     return (
         <DataContext.Provider value={{
             products, error, fetchStatus, quantity, increase, dataNum,
-            reduce, cartControl, cartOpen, resetCart, toggleModal, 
-            selectCarousel, previousImage, nextImage, netPrice, cartData, cost, showModal
+            reduce, cartControl, cartOpen, resetCart, toggleModal,
+            previousImage, nextImage, netPrice, cartData, cost, showModal
         }}>
             {props.children}
         </DataContext.Provider>

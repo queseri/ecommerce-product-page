@@ -1,5 +1,5 @@
 import React from 'react'
-import { useContext, useRef, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 //import "../../react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Left from '../images/icon-previous.svg'
 import Right from '../images/icon-next.svg'
@@ -78,7 +78,7 @@ function Main() {
 
                     <ul className="carousel-nav carousel-nav-hide">
                         {products && products.map((product, idx) => <li key={product._id}>
-                            <button className='carousel-indicator' data-id={product.id} onClick={selectCarousel}>
+                            <button className='carousel-indicator carousel-indicator-main' data-id={product.id} onClick={selectCarousel}>
                                 <img className='carousel-thumb' src={product.thubmnail} alt="" />
                                 <span className="sr-only">Select product {product.name}</span>
                             </button>
