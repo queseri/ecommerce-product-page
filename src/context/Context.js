@@ -10,7 +10,7 @@ export const DataProvider = (props) => {
     const [quantity, setQuantity] = useState(0)
     const [cartOpen, setCartOpen] = useState(false)
     const [showModal, setShowModal] = useState(false)
-    const [dataNum, setDataNum] = useState(0)
+    const [dataNum, setDataNum] = useState(1)
 
     const rate = .5
     const [cost, setCost] = useState(250)
@@ -57,9 +57,10 @@ export const DataProvider = (props) => {
     const toggleModal = (evt) => {
 
         if (!showModal) {
-            const target = evt.target.closest("li").dataset.id
-            setDataNum(target)
-            console.log(target)
+            const target = parseInt(evt.target.closest(".carousel-slide").dataset.id)
+            setDataNum(target - 1)           
+            console.log(dataNum)
+            console.log(`current slide number is ${dataNum + 1}` )
         }
 
         setShowModal(!showModal)
@@ -71,26 +72,26 @@ export const DataProvider = (props) => {
         targetSlide.classList.add("current-slide")
     }
 
-    const nextModalImage = () => {
-        console.log(dataNum)
-        console.log(products.length)
-        if (parseInt(dataNum) > products.length - 1) {
-            setDataNum(1)
+    const nextImage = () => {
+        console.log(`current slide number is ${dataNum + 1}` )
+        console.log(`length of array ${products.length}` )
+        if (parseInt(dataNum) >= products.length - 1) {
+            setDataNum(0)
         } else {
             setDataNum(parseInt(dataNum) + 1)
         }
     }
 
-    const previousModalImage = () => {
+    const previousImage = () => {
         console.log(dataNum)
         console.log(products.length)
-        if (parseInt(dataNum) <= 1) {
-            setDataNum(products.length)
+        if (parseInt(dataNum) <= 0) {
+            setDataNum(products.length - 1 )
         } else {
             setDataNum(parseInt(dataNum) - 1)
         }
     }
-
+/*
     const nextImage = (evt) => {
         const currentSlide = document.querySelector(".current-slide")
         const nextSlide = currentSlide.nextElementSibling
@@ -114,7 +115,7 @@ export const DataProvider = (props) => {
         setCartData(prevSlide.dataset.id - 1)
         console.log(evt)
     }
-
+*/
     const selectCarousel = (evt) => {
         const track = document.querySelector(".carousel-track")
         const dots = Array.from(document.querySelectorAll(".carousel-indicator"))
@@ -135,7 +136,7 @@ export const DataProvider = (props) => {
     return (
         <DataContext.Provider value={{
             products, error, fetchStatus, quantity, increase, dataNum,
-            reduce, cartControl, cartOpen, resetCart, toggleModal, nextModalImage, previousModalImage,
+            reduce, cartControl, cartOpen, resetCart, toggleModal, 
             selectCarousel, previousImage, nextImage, netPrice, cartData, cost, showModal
         }}>
             {props.children}

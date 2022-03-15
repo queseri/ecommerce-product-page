@@ -13,15 +13,17 @@ import { Rings } from 'react-loader-spinner'
 import CarouselBtn from './CarouselBtn'
 
 function Main() {
-    const { products, error, fetchStatus, reduce, increase, quantity,
+    const { products, error, fetchStatus, reduce, increase, quantity, dataNum,
         cartOpen, resetCart, selectCarousel, previousImage, nextImage,
         netPrice, cartData, cost, toggleModal } = useContext(DataContext)
-    const sliderRef = useRef(null)
+
+    const productList = products && products.filter((product, idx) => idx === parseInt(dataNum))
+    //const sliderRef = useRef(null)
     const size = useWindowSize();
 
     useEffect(() => {
 
-    }, [size.width])    
+    }, [size.width])
 
     if (fetchStatus === 'idle' || fetchStatus === 'loading' || products === 'undefined' || products.length === 0) {
         return <div className='loading'>
@@ -47,6 +49,18 @@ function Main() {
                         <CarouselBtn leftDirection={false} onClick={nextImage} src={Right}
                             text="view the next slide" />
 
+                        <div className='carousel-track carousel-track-modal'>
+                            {productList && productList.map(product => <div key={product._id}
+                                data-id={product.id} data-cost={product.price}
+                                className={`carousel-slide`}>
+                                <button className='carousel-image-btn' onClick={toggleModal}>
+                                    <img className='carousel-image' src={product.image}
+                                        alt={`view product ${product.name}`} />
+                                </button>
+                            </div>
+                            )}
+                        </div>
+                        {/*
                         <ul className='carousel-track' ref={sliderRef}>
                             {products && products.map((product, idx) => <li key={product._id}
                                 data-id={product.id}
@@ -59,6 +73,7 @@ function Main() {
                                 </button>
                             </li>)}
                         </ul>
+                     */}
                     </div>
 
                     <ul className="carousel-nav carousel-nav-hide">
@@ -69,7 +84,7 @@ function Main() {
                             </button>
                         </li>)}
                     </ul>
-                    
+
                 </div>
 
                 <Primary increase={increase} reduce={reduce} quantity={quantity} cart={Cart}
