@@ -29,7 +29,8 @@ function MainModal() {
                     text="view the next slide" modalBtn={true} />
 
                 <div className='carousel-track carousel-track-modal'>                                   
-                    {productList && productList.map(product => <img key={product._id} className='carousel-image' src={product.image} alt="" />)}
+                    {productList && productList.map(product => <img key={product._id} 
+                    className='carousel-image carousel-image-modal' src={product.image} alt="" />)}
                     
                 </div>
 

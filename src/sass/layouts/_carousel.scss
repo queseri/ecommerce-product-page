@@ -13,26 +13,27 @@
 
 .carousel-track {
     position: relative;
+   // transform:scale(1.3);
     transition: transform 250ms ease-in;
-    min-height: 18.75rem;
+   // min-height: 18.75rem;
 
     @include abstract.mQ(42.5rem) {
-        transition: none;
-        min-height: 24.75rem;
+      //  transition: none;
+     //   min-height: 24.75rem;
     }
 
     @include abstract.mQ(61.25rem) {
-        min-height: 27.8125rem;
-        min-width: 27.8175rem;
+    //    min-height: 27.8125rem;
+    //    min-width: 27.8175rem;
     }
 }
 
 .carousel-slide {
-    position: absolute;
+  //  position: absolute;
     width: 100%;
-    top: 0;
-    bottom: 0;
-    border-radius: 15px;
+  //  top: 0;
+  //  bottom: 0;
+  //  border-radius: 15px;
     overflow: hidden;
 }
 
@@ -47,12 +48,12 @@
 
     @include abstract.mQ(61.25rem) {
         height: 100%;
-        border-radius: 15px;
+       // border-radius: 15px;
     }
 }
 
 .carousel-track-container {
-    min-height: 18.75rem;
+   // min-height: 18.75rem;
     position: relative;
 
     @include abstract.mQ(42.5rem) {
@@ -130,7 +131,15 @@
     padding: 0;
     margin: 0;
     pointer-events: none;
+    @include abstract.mQ(42.5rem) {
+        border-radius: 15px;
+        overflow: hidden;
+    }
     @include abstract.mQ(61.25rem) {
         pointer-events: visible;
     }
+}
+
+.carousel-image-modal {
+	border-radius: 15px;
 }

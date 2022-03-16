@@ -44,6 +44,13 @@
     display: flex;
 }
 
+.carousel-button-right.modal-btn-control {
+    right: -1.5rem;
+}
+.carousel-button-left.modal-btn-control {
+    left: -1.5rem;
+}
+
 .active-modal-slide {
     background-color: abstract.$clr-orange;
     opacity: 0.5;

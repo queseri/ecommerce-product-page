@@ -43,7 +43,7 @@ function Main() {
                         <CarouselBtn leftDirection={false} onClick={nextImage} src={Right}
                             text="view the next slide" />
 
-                        <div className='carousel-track carousel-track-modal'>
+                        <div className='carousel-track'>
                             {productList && productList.map(product => <div key={product._id}
                                 data-id={product.id} data-cost={product.price}
                                 className={`carousel-slide`}>
@@ -54,20 +54,7 @@ function Main() {
                             </div>
                             )}
                         </div>
-                        {/*
-                        <ul className='carousel-track' ref={sliderRef}>
-                            {products && products.map((product, idx) => <li key={product._id}
-                                data-id={product.id}
-                                data-cost={product.price}
-                                className={`carousel-slide  ${idx === 0 ? "current-slide" : ""}`}
-                                style={{ left: `${idx * size.width}px` }}>
-                                <button className='carousel-image-btn' onClick={toggleModal}>
-                                    <img className='carousel-image' src={product.image}
-                                        alt={`view product ${product.name}`} />
-                                </button>
-                            </li>)}
-                        </ul>
-                     */}
+                       
                     </div>
 
                     <ul className="carousel-nav carousel-nav-hide">
