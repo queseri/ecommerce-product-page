@@ -28,7 +28,6 @@ export const DataProvider = (props) => {
             const allProducts = await user.functions.getAllProducts()
             setProducts(await allProducts)
             setFetchStatus("success")
-
             console.log(allProducts)
 
         } catch (err) {
@@ -64,7 +63,7 @@ export const DataProvider = (props) => {
         }
 
         setShowModal(!showModal)
-    }   
+    }
 
     const updateCost = () => {
         const targetData = document.querySelector(".carousel-slide").dataset.cost
@@ -81,27 +80,26 @@ export const DataProvider = (props) => {
             setDataNum(parseInt(dataNum) + 1)
         }
         updateCost()
+        console.log(dataNum)
     }
 
     const previousImage = () => {
-       
         if (parseInt(dataNum) <= 0) {
             setDataNum(products.length - 1)
         } else {
             setDataNum(parseInt(dataNum) - 1)
         }
-
-       updateCost()
+        updateCost()
+        console.log(dataNum)
     }
-  
+
 
     const dots = Array.from(document.querySelectorAll(".carousel-indicator-main"))
-    dots.forEach(dot => {
-        dot.addEventListener("click", function () {
-            const targetData = document.querySelector(".carousel-slide").dataset.cost
-            console.log(targetData)
-           // setDataNum(parseInt(dot.dataset.id - 1))
-           setDataNum(parseInt(dot.dataset.id - 1))
+ 
+    dots.forEach((dot, idx )=> {
+        dot.addEventListener("click", function () {          
+            const targetData = document.querySelector(".carousel-slide").dataset.cost           
+            setDataNum(idx)           
             setCost(parseInt(targetData))
             setNetPrice(cost - (cost * rate))
         })
@@ -109,9 +107,9 @@ export const DataProvider = (props) => {
 
     useEffect(() => {
         fetchData()
-
         setFetchStatus("success")
     }, [])
+
 
     return (
         <DataContext.Provider value={{

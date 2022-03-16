@@ -1,10 +1,10 @@
 import React from 'react'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 //import "../../react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Left from '../images/icon-previous.svg'
 import Right from '../images/icon-next.svg'
 import Delete from '../images/icon-delete.svg'
-import useWindowSize from './useWindowResize'
+//import useWindowSize from './useWindowResize'
 import Cart from '../images/icon-cart.svg'
 import { DataContext } from '../context/Context'
 import Checkout from './Checkout'
@@ -18,13 +18,7 @@ function Main() {
         netPrice, cartData, cost, toggleModal } = useContext(DataContext)
 
     const productList = products && products.filter((product, idx) => idx === parseInt(dataNum))
-    //const sliderRef = useRef(null)
-    const size = useWindowSize();
-
-    useEffect(() => {
-
-    }, [size.width])
-
+   
     if (fetchStatus === 'idle' || fetchStatus === 'loading' || products === 'undefined' || products.length === 0) {
         return <div className='loading'>
             <Rings color="#00BFFF" height={160} width={160} />

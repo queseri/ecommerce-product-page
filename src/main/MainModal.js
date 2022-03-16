@@ -8,13 +8,10 @@ import Right from '../images/icon-next.svg'
 import CarouselBtn from './CarouselBtn'
 
 function MainModal() {
-    // const size = useWindowSize();
-    const { products, showModal, dataNum, toggleModal, nextImage, previousImage } = useContext(DataContext)
-   // console.log(dataNum)
-
+    
+    const { products, showModal, dataNum, toggleModal, nextImage, previousImage } = useContext(DataContext)   
     const productList = products && products.filter((product, idx) => idx === parseInt(dataNum ))
 
-    //console.log(productList)
     return (
         <div className={`main-modal ${showModal ? "show-modal" : ""}`}>
             <div className='carousel-track-container carousel-track-container-modal'>
@@ -40,10 +37,9 @@ function MainModal() {
 
             <ul className="carousel-nav carousel-nav-hide">
                 {products && products.map((product, idx) => <li key={product._id}>
-                    <button className='carousel-indicator' data-id={product.id}>
-                        <img className='carousel-thumb' src={product.thubmnail} alt="" />
-                        <span className="sr-only">Select product {product.name}</span>
-                    </button>
+                    <div className={`carousel-indicator ${dataNum === idx ? "active-modal-slide" : ""}`} data-id={product.id}>
+                        <img className='carousel-thumb' src={product.thubmnail} alt="" />                       
+                    </div>
                 </li>)}
             </ul>
         </div>
