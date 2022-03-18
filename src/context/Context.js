@@ -11,6 +11,7 @@ export const DataProvider = (props) => {
     const [cartOpen, setCartOpen] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [dataNum, setDataNum] = useState(1)
+   // const [inProp, setInProp] = useState(false);
 
     const rate = .5
     const [cost, setCost] = useState(250)
@@ -80,7 +81,7 @@ export const DataProvider = (props) => {
             setDataNum(parseInt(dataNum) + 1)
         }
         updateCost()
-        console.log(dataNum)
+       
     }
 
     const previousImage = () => {
@@ -90,7 +91,7 @@ export const DataProvider = (props) => {
             setDataNum(parseInt(dataNum) - 1)
         }
         updateCost()
-        console.log(dataNum)
+       
     }
 
 
@@ -114,7 +115,7 @@ export const DataProvider = (props) => {
     return (
         <DataContext.Provider value={{
             products, error, fetchStatus, quantity, increase, dataNum,
-            reduce, cartControl, cartOpen, resetCart, toggleModal,
+            reduce, cartControl, cartOpen, resetCart, toggleModal, 
             previousImage, nextImage, netPrice, cartData, cost, showModal
         }}>
             {props.children}

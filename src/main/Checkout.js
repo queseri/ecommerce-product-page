@@ -1,6 +1,9 @@
 import React from 'react'
 
 function Checkout(props) {
+    const CheckOut = () => {
+        alert("Thank you for shopping with us")
+    }
     return (
         <div className={`checkout-container ${props.cartOpen ? "" : "hide-checkout"}  `}>
             <h3 className="checkout-title">
@@ -25,7 +28,7 @@ function Checkout(props) {
                             </button>
                         </div>
                     </div>
-                    <button className='btn-checkout'>Checkout</button>
+                    <button className='btn-checkout' onClick={CheckOut}>Checkout</button>
                 </div>
             }
         </div>

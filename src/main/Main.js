@@ -1,5 +1,6 @@
 import React from 'react'
-import { useContext } from 'react'
+import {  useContext } from 'react'
+//import { CSSTransition } from 'react-transition-group';
 //import "../../react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Left from '../images/icon-previous.svg'
 import Right from '../images/icon-next.svg'
@@ -12,13 +13,13 @@ import Primary from './Primary'
 import { Rings } from 'react-loader-spinner'
 import CarouselBtn from './CarouselBtn'
 
-function Main() {
+function Main() {    
     const { products, error, fetchStatus, reduce, increase, quantity, dataNum,
-        cartOpen, resetCart, selectCarousel, previousImage, nextImage,
+        cartOpen, resetCart, selectCarousel, previousImage, nextImage, 
         netPrice, cartData, cost, toggleModal } = useContext(DataContext)
 
     const productList = products && products.filter((product, idx) => idx === parseInt(dataNum))
-   
+
     if (fetchStatus === 'idle' || fetchStatus === 'loading' || products === 'undefined' || products.length === 0) {
         return <div className='loading'>
             <Rings color="#00BFFF" height={160} width={160} />
@@ -30,7 +31,9 @@ function Main() {
             <p className='loading-title loading-error-title'>Something went wrong!!</p>
         </div>
     }
-    // size.width = slideRef.current.offsetWidth
+   const updateCart = () => {
+       alert(`${quantity === 0 ? "They are no items to add" : "Cart successfuly updated"}`)
+   }
     return (
         <main className='main'>
             <div className="main-container">
@@ -47,14 +50,17 @@ function Main() {
                             {productList && productList.map(product => <div key={product._id}
                                 data-id={product.id} data-cost={product.price}
                                 className={`carousel-slide`}>
-                                <button className='carousel-image-btn' onClick={toggleModal}>
-                                    <img className='carousel-image' src={product.image}
-                                        alt={`view product ${product.name}`} />
+                                <button className='carousel-image-btn' onClick={toggleModal}>                                   
+                                        <img className='carousel-image' src={product.image}
+                                            width={1000} height={1000}
+                                            aria-live="polite"
+                                            alt={`view product ${product.name}`} />                                   
                                 </button>
                             </div>
                             )}
+
                         </div>
-                       
+
                     </div>
 
                     <ul className="carousel-nav carousel-nav-hide">
@@ -68,7 +74,7 @@ function Main() {
 
                 </div>
 
-                <Primary increase={increase} reduce={reduce} quantity={quantity} cart={Cart}
+                <Primary increase={increase} reduce={reduce} quantity={quantity} cart={Cart} updateCart={updateCart}
                     netprice={netPrice.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
                     cost={cost.toLocaleString('en-us', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 })}
                 />

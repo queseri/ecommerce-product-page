@@ -53,6 +53,6 @@
 
 .active-modal-slide {
     background-color: abstract.$clr-orange;
-    opacity: 0.5;
-    mix-blend-mode: color-dodge;
+    opacity: 0.2;
+    mix-blend-mode: lighten;
 }
