@@ -25,6 +25,7 @@
     height: 100%;
     width: 100%;
     object-fit: cover;
+    min-height: 23.4375rem;
 
     @include abstract.mQ(61.25rem) {
         height: 100%;
