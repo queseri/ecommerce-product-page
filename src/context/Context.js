@@ -10,10 +10,9 @@ export const DataProvider = (props) => {
     const [quantity, setQuantity] = useState(0)
     const [cartOpen, setCartOpen] = useState(false)
     const [showModal, setShowModal] = useState(false)
-    const [dataNum, setDataNum] = useState(1)
-    const [currentQuantity, setCurrentQuantity] = useState(0)
-    // const [inProp, setInProp] = useState(false);
-
+    const [dataNum, setDataNum] = useState(1) //dataNum -> number used for tracking current slide
+    const [currentQuantity, setCurrentQuantity] = useState(0) // current quantity that has to be added to the cart
+   
     const rate = .5
     const [cost, setCost] = useState(250)
     const [netPrice, setNetPrice] = useState(cost - (cost * rate))
@@ -38,15 +37,7 @@ export const DataProvider = (props) => {
             console.error(err);
         }
     }
-    /*
-        const reduce = (evt) => {
-            quantity > 0 ? setQuantity(quantity - 1) : setQuantity(0)
-        }
-    
-        const increase = (evt) => {
-            quantity < 10 ? setQuantity(quantity + 1) : setQuantity(10)
-        }
-    */
+   
     const increaseCurrentQuantity = () => {
         setCurrentQuantity(currentQuantity + 1)
     }
@@ -54,7 +45,6 @@ export const DataProvider = (props) => {
     const reduceCurrentQuantity = () => {
         currentQuantity > 0 ? setCurrentQuantity(currentQuantity - 1) : setCurrentQuantity(0)
     }
-
 
     const updateCart = () => {
         currentQuantity <= 0 ? alert("There are no items to add") : setQuantity(quantity + currentQuantity)
