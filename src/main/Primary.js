@@ -1,4 +1,6 @@
 import React from 'react'
+import Plus from '../images/icon-plus.svg'
+import Minus from '../images/icon-minus.svg'
 
 function Primary(props) {
     return (
@@ -42,20 +44,20 @@ function Primary(props) {
 
                         <button className="btn btn-reduce" onClick={props.reduce}>
                             <span className="sr-only">reduce the quantity to purchase from the cart</span>
-                            -
+                            <img src={Minus} alt="" aria-hidden={true} />
                         </button>
 
                         <span className='quantity' aria-live='polite'>
-                            {props.quantity === 0 ?
+                            {props.currentQuantity === 0 ?
                                 <small className='sr-only'>the cart is empty</small> :
                                 <small className='sr-only'>total items in the cart is equal to </small>
                             }
-                            {props.quantity}
+                            {props.currentQuantity}
                         </span>
 
                         <button className="btn btn-increase" onClick={props.increase}>
-                            +
-                            <span className="sr-only"> the quantity of items to the cart</span>
+                            <img src={Plus} alt="" aria-hidden={true} />
+                            <span className="sr-only">add to the quantity of items to the cart</span>
                         </button>
 
                     </div>

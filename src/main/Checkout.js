@@ -3,9 +3,10 @@ import React from 'react'
 function Checkout(props) {
     const CheckOut = () => {
         alert("Thank you for shopping with us")
+        return props.checkout()
     }
     return (
-        <div className={`checkout-container ${props.cartOpen ? "" : "hide-checkout"}  `}>
+        <div className={`hide-checkout ${props.cartOpen ? "checkout-container" : ""} `}>
             <h3 className="checkout-title">
                 cart
             </h3>

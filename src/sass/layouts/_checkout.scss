@@ -1,8 +1,15 @@
 @use 'sass:math';
 @use '../abstract';
 
-.checkout-container {
+
+.hide-checkout {
+    //display: none;
     position: absolute;
+    top: -40rem;
+}
+
+.checkout-container {
+    display: block;
     background: abstract.$clr-white;
     width: 90%;
     max-width: 25rem;
@@ -14,6 +21,7 @@
     top: 0;
     border-radius: 10px;
     box-shadow: 1px 1px 1px 1px abstract.$clr-med-grey;
+    transition: top 250ms ease-in;
 
     img {
         width: 3.125rem;
@@ -31,10 +39,6 @@
         right: 0;
         margin-block-start: -5rem;
     }
-}
-
-.hide-checkout {
-    display: none;
 }
 
 .checkout-main-container {

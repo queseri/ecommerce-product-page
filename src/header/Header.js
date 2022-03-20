@@ -6,12 +6,11 @@ import profile from '../images/image-avatar.png'
 import logo from '../images/logo.svg'
 import { DataContext } from '../context/Context'
 
-function Header({removeOverlay}) {
+function Header({ removeOverlay }) {
     const [openModal, setOpenModal] = useState(false)
     const { quantity, cartControl } = useContext(DataContext)
     function showModal() {
-        setOpenModal(!openModal)
-        removeOverlay()
+        setOpenModal(!openModal)      
     }
     return (
         <header className='header container'>
@@ -35,7 +34,8 @@ function Header({removeOverlay}) {
                     </button>
 
                     <div className="logo-container">
-                        <img className='logo-image' src={logo} alt="" aria-hidden={true}/>
+                        <img className='logo-image' src={logo}
+                            alt="the sneaker company, your one stop shop for international sneakers" />
                     </div>
                 </div>
 
@@ -57,8 +57,9 @@ function Header({removeOverlay}) {
                         <li className='nav-list-item'>
                             <a className='nav-list-item-btn' href="/">Contact</a>
                         </li>
-                        
-                    </ul>                   
+
+                    </ul>
+                    <div className="decorative"></div>
                 </div>
 
                 <div className="product-summary flex">
@@ -73,7 +74,7 @@ function Header({removeOverlay}) {
                     </button>
                 </div>
 
-            </nav>        
+            </nav>
         </header>
     )
 }

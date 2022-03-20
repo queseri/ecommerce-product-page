@@ -13,27 +13,11 @@
 
 .carousel-track {
     position: relative;
-    // transform:scale(1.3);
     transition: transform 250ms ease-in;
-    // min-height: 18.75rem;
-
-    @include abstract.mQ(42.5rem) {
-        //  transition: none;
-        //   min-height: 24.75rem;
-    }
-
-    @include abstract.mQ(61.25rem) {
-        //    min-height: 27.8125rem;
-        //    min-width: 27.8175rem;
-    }
 }
 
 .carousel-slide {
-    //  position: absolute;
     width: 100%;
-    //  top: 0;
-    //  bottom: 0;
-    //  border-radius: 15px;
     overflow: hidden;
 }
 
@@ -42,22 +26,16 @@
     width: 100%;
     object-fit: cover;
 
-    @include abstract.mQ(42.5rem) {
-        // border-radius: 15px;
-    }
-
     @include abstract.mQ(61.25rem) {
         height: 100%;
-        // border-radius: 15px;
     }
 }
 
 .carousel-track-container {
-    // min-height: 18.75rem;
     position: relative;
 
     @include abstract.mQ(42.5rem) {
-        min-height: 27.8125rem;
+        //   min-height: 27.8125rem;
     }
 }
 
@@ -74,6 +52,17 @@
     align-items: center;
     border: none;
     background-color: abstract.$clr-white;
+
+    &:focus,
+    &:hover {
+       cursor: pointer;
+        outline: dashed currentColor;
+        outline-offset: -0.25em;
+       img {
+         filter: invert(56%) sepia(26%) saturate(3056%) hue-rotate(347deg) brightness(102%) contrast(101%);
+       }
+    }
+
 
     @include abstract.mQ(42.5rem) {
         display: none;
@@ -104,6 +93,7 @@
     display: none;
 
     @include abstract.mQ(42.5rem) {
+        margin-top: 1rem;
         display: flex;
     }
 
@@ -139,6 +129,7 @@
 
     @include abstract.mQ(61.25rem) {
         pointer-events: visible;
+        cursor: pointer;
     }
 }
 

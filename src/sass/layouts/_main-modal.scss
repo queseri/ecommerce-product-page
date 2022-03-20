@@ -38,6 +38,16 @@
     img {
         filter: brightness(100);
     }
+
+    &:focus,
+    &:hover {
+       cursor: pointer;
+        outline: dashed abstract.$clr-white;
+        outline-offset: 0.25em;
+       img {
+         filter: invert(56%) sepia(26%) saturate(3056%) hue-rotate(347deg) brightness(102%) contrast(101%);
+       }
+    }
 }
 
 .modal-btn-control {

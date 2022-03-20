@@ -11,7 +11,8 @@ export const DataProvider = (props) => {
     const [cartOpen, setCartOpen] = useState(false)
     const [showModal, setShowModal] = useState(false)
     const [dataNum, setDataNum] = useState(1)
-   // const [inProp, setInProp] = useState(false);
+    const [currentQuantity, setCurrentQuantity] = useState(0)
+    // const [inProp, setInProp] = useState(false);
 
     const rate = .5
     const [cost, setCost] = useState(250)
@@ -37,13 +38,27 @@ export const DataProvider = (props) => {
             console.error(err);
         }
     }
-
-    const reduce = (evt) => {
-        quantity > 0 ? setQuantity(quantity - 1) : setQuantity(0)
+    /*
+        const reduce = (evt) => {
+            quantity > 0 ? setQuantity(quantity - 1) : setQuantity(0)
+        }
+    
+        const increase = (evt) => {
+            quantity < 10 ? setQuantity(quantity + 1) : setQuantity(10)
+        }
+    */
+    const increaseCurrentQuantity = () => {
+        setCurrentQuantity(currentQuantity + 1)
     }
 
-    const increase = (evt) => {
-        quantity < 10 ? setQuantity(quantity + 1) : setQuantity(10)
+    const reduceCurrentQuantity = () => {
+        currentQuantity > 0 ? setCurrentQuantity(currentQuantity - 1) : setCurrentQuantity(0)
+    }
+
+
+    const updateCart = () => {
+        currentQuantity <= 0 ? alert("There are no items to add") : setQuantity(quantity + currentQuantity)
+        setCurrentQuantity(0)
     }
 
     const resetCart = () => {
@@ -81,7 +96,7 @@ export const DataProvider = (props) => {
             setDataNum(parseInt(dataNum) + 1)
         }
         updateCost()
-       
+
     }
 
     const previousImage = () => {
@@ -91,16 +106,15 @@ export const DataProvider = (props) => {
             setDataNum(parseInt(dataNum) - 1)
         }
         updateCost()
-       
+
     }
 
-
     const dots = Array.from(document.querySelectorAll(".carousel-indicator-main"))
- 
-    dots.forEach((dot, idx )=> {
-        dot.addEventListener("click", function () {          
-            const targetData = document.querySelector(".carousel-slide").dataset.cost           
-            setDataNum(idx)           
+
+    dots.forEach((dot, idx) => {
+        dot.addEventListener("click", function () {
+            const targetData = document.querySelector(".carousel-slide").dataset.cost
+            setDataNum(idx)
             setCost(parseInt(targetData))
             setNetPrice(cost - (cost * rate))
         })
@@ -114,8 +128,9 @@ export const DataProvider = (props) => {
 
     return (
         <DataContext.Provider value={{
-            products, error, fetchStatus, quantity, increase, dataNum,
-            reduce, cartControl, cartOpen, resetCart, toggleModal, 
+            products, error, fetchStatus, quantity, dataNum, updateCart,
+            increaseCurrentQuantity, reduceCurrentQuantity, currentQuantity,
+            cartControl, cartOpen, resetCart, toggleModal,
             previousImage, nextImage, netPrice, cartData, cost, showModal
         }}>
             {props.children}
