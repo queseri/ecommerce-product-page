@@ -32,9 +32,9 @@ Users should be able to:
 
 ### Screenshot
 
-![desktop](.src/images/desktop.png)
-![desktop select](.src/images/desktop-select.png)
-![desktop cart](.src/images/desktop-cart.png)
+![desktop](./src/images/desktop.png)
+![desktop select](./src/images/desktop-select.png)
+![desktop cart](./src/images/desktop-cart.png)
 
 
 ### Links
